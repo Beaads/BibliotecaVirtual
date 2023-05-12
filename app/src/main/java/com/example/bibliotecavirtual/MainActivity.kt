@@ -3,8 +3,7 @@ package com.example.bibliotecavirtual
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,51 +23,125 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.bibliotecavirtual.ui.theme.BibliotecaVirtualTheme
-import com.example.bibliotecavirtual.ui.theme.Purple500
-import com.example.bibliotecavirtual.ui.theme.Teal200
+import com.example.bibliotecavirtual.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BibliotecaVirtualTheme {
-                // A surface container using the 'background' color from the theme
                 Surface {
-                    BookItem()
+                    BooksSection()
                 }
             }
         }
     }
 }
 
+@Composable
+fun BooksSection() {
+    Column(Modifier
+        .fillMaxHeight()) {
+        Text(
+            text = "Livros lidos: ",
+            Modifier.padding(10.dp),
+            fontSize = 20.sp,
+            fontWeight = FontWeight(400))
+        Column(
+            Modifier
+                .padding(start = 10.dp, end = 8.dp)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Spacer(Modifier)
+            BookItem()
+            BookItem()
+            BookItem()
+            BookItem()
+            BookItem()
+            BookItem()
+            BookItem()
+            BookItem()
+            BookItem()
+            BookItem()
+            Spacer(Modifier)
+        }
+    }
+}
+
+
+@Composable
+fun BookItem() {
+    Surface(
+        shape = RoundedCornerShape(10.dp),
+        elevation = 4.dp
+    ) {
+        Column(
+            Modifier
+                .heightIn(2.dp, 200.dp)
+                .fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(85.dp)
+                    .background(
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                Gray, DarkGray
+                            )
+                        )
+                    )
+                    .fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(start = 85.dp, top = 20.dp, end = 10.dp)
+                ) {
+                    Spacer(modifier = Modifier.width(40.dp))
+                    Text(
+                        text = LoremIpsum(50).values.first(),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight(700),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = LoremIpsum(50).values.first(),
+                        Modifier.padding(top = 3.dp),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight(400),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+                Image(
+                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    contentDescription = null,
+                    Modifier
+                        .size(65.dp)
+                        .offset(x = 10.dp, y = 0.dp)
+                        .clip(shape = CircleShape)
+                        .align(CenterStart)
+                )
+            }
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
-fun BookItem() {
-    Column(Modifier
-        .height(45.dp)
-        .width(200.dp)) {
-        Box(modifier = Modifier
-            .height(50.dp)
-            .background(brush = Brush.horizontalGradient(colors = listOf(
-                Purple500, Teal200
-            )))
-            .fillMaxWidth()) {
-            Row (){
-                Spacer(modifier = Modifier.width(40.dp))
-                Text(text = "Texto 1")
-            }
+private fun BooksSectionPreview() {
+    BooksSection()
+}
 
-            Image(painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = null,
-                Modifier.size(30.dp)
-                    .offset(x = 5.dp, y = 0.dp)
-                    .clip(shape = CircleShape)
-                    .align(CenterStart))
-        }
-    }
+@Preview(showBackground = true)
+@Composable
+private fun BookItemPreview() {
+    BookItem()
 }
