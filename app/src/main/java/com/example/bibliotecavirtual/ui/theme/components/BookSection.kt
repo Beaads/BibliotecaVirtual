@@ -1,8 +1,8 @@
 package com.example.bibliotecavirtual.ui.theme.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,18 +28,16 @@ fun BooksSection(
             fontSize = 20.sp,
             fontWeight = FontWeight(400)
         )
-        Column(
+        LazyColumn(
             Modifier
                 .padding(start = 10.dp, end = 8.dp)
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(vertical = 6.dp)
         ) {
-            Spacer(Modifier)
-            for (b in books) {
+            items(books) { b ->
                 BookItem(book = b)
             }
-            Spacer(Modifier)
         }
     }
 }

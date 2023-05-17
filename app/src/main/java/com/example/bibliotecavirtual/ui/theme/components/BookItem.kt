@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.bibliotecavirtual.model.Book
 import com.example.bibliotecavirtual.ui.theme.DarkGray
 import com.example.bibliotecavirtual.ui.theme.Gray
@@ -70,15 +71,16 @@ fun BookItem(book: Book) {
                     )
                 }
 
-                Image(
-                    painter = painterResource(id = book.image),
+                AsyncImage(
+                    model = book.image,
                     contentDescription = null,
                     Modifier
                         .size(65.dp)
                         .offset(x = 10.dp, y = 0.dp)
                         .clip(shape = CircleShape)
                         .align(Alignment.CenterStart),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(id = R.drawable.placeholder)
                 )
             }
         }
