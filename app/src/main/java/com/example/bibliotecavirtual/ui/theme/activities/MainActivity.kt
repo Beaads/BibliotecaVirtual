@@ -1,4 +1,4 @@
-package com.example.bibliotecavirtual
+package com.example.bibliotecavirtual.ui.theme.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

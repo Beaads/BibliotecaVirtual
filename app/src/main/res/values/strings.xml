@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BibliotecaVirtual</string>
+    <string name="add_book">Adicione um livro a sua lista de livros</string>
 </resources>

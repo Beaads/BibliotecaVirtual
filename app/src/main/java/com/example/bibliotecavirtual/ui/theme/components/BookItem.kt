@@ -1,6 +1,5 @@
 package com.example.bibliotecavirtual.ui.theme.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -62,7 +61,7 @@ fun BookItem(book: Book) {
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
-                        text = book.descricao,
+                        text = book.autor,
                         Modifier.padding(top = 3.dp),
                         fontSize = 14.sp,
                         fontWeight = FontWeight(400),
@@ -93,7 +92,7 @@ private fun BookItemPreview() {
     BookItem(
         Book(
             name = LoremIpsum(50).values.first(),
-            descricao = LoremIpsum(50).values.first(),
+            autor = LoremIpsum(50).values.first(),
             image = R.drawable.ic_launcher_background
         )
     )

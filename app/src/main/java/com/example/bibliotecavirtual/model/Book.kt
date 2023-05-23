@@ -4,6 +4,6 @@ import androidx.annotation.DrawableRes
 
 class Book(
     val name: String,
-    val descricao: String,
+    val autor: String,
     @DrawableRes val image: Int
 )

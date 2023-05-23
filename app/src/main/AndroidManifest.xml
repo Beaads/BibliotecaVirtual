@@ -14,7 +14,7 @@
         android:theme="@style/Theme.BibliotecaVirtual"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.bibliotecavirtual.ui.theme.activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.BibliotecaVirtual">
@@ -27,6 +27,13 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+
+        <activity
+            android:name="com.example.bibliotecavirtual.ui.theme.activities.BookFormActivity"
+            android:exported="true"
+            android:label="@string/add_book"
+            android:theme="@style/Theme.BibliotecaVirtual">
         </activity>
     </application>
 
