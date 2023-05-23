@@ -61,7 +61,7 @@ fun BookItem(book: Book) {
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
-                        text = book.autor,
+                        text = book.descricao,
                         Modifier.padding(top = 3.dp),
                         fontSize = 14.sp,
                         fontWeight = FontWeight(400),
@@ -92,7 +92,7 @@ private fun BookItemPreview() {
     BookItem(
         Book(
             name = LoremIpsum(50).values.first(),
-            autor = LoremIpsum(50).values.first(),
+            descricao = LoremIpsum(50).values.first(),
             image = R.drawable.ic_launcher_background
         )
     )
