@@ -92,8 +92,7 @@ private fun BookItemPreview() {
     BookItem(
         Book(
             name = LoremIpsum(50).values.first(),
-            descricao = LoremIpsum(50).values.first(),
-            image = R.drawable.ic_launcher_background
+            descricao = LoremIpsum(50).values.first()
         )
     )
 }

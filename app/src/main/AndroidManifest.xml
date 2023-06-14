@@ -17,7 +17,8 @@
             android:name="com.example.bibliotecavirtual.ui.theme.activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.BibliotecaVirtual">
+            android:theme="@style/Theme.BibliotecaVirtual"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +34,8 @@
             android:name="com.example.bibliotecavirtual.ui.theme.activities.BookFormActivity"
             android:exported="true"
             android:label="@string/add_book"
-            android:theme="@style/Theme.BibliotecaVirtual">
+            android:theme="@style/Theme.BibliotecaVirtual"
+            android:windowSoftInputMode="adjustResize">
         </activity>
     </application>
 

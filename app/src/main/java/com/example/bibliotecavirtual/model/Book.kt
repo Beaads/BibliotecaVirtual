@@ -1,9 +1,7 @@
 package com.example.bibliotecavirtual.model
 
-import androidx.annotation.DrawableRes
-
-class Book(
+data class Book(
     val name: String,
     val descricao: String,
-    @DrawableRes val image: Int
+    val image: String? = null
 )
