@@ -35,10 +35,23 @@ class BookFormActivity : ComponentActivity() {
         setContent {
             BibliotecaVirtualTheme {
                 Surface {
-                    BookFormScreen(onSaveClick = { book ->
-                        dao.save(book)
-                        finish()
-                    })
+                    val bookId = intent.getIntExtra("bookId", -1)
+                    val bookName = intent.getStringExtra("bookName") ?: ""
+                    val bookDescricao = intent.getStringExtra("bookDescricao") ?: ""
+                    val bookImage = intent.getStringExtra("bookImage") ?: ""
+
+                    BookFormScreen(
+                        onSaveClick = { book, id ->
+                            if (id != -1) {
+                                dao.update(id, book)
+                            } else {
+                                dao.save(book)
+                            }
+                            finish()
+                        },
+                        initialBook = Book(bookId, bookName, bookDescricao, bookImage),
+                        initialBookId = bookId
+                    )
                 }
             }
         }
@@ -46,7 +59,11 @@ class BookFormActivity : ComponentActivity() {
 }
 
 @Composable
-fun BookFormScreen(onSaveClick: (Book) -> Unit = {}) {
+fun BookFormScreen(onSaveClick: (Book, Int) -> Unit = { _, _ -> }, initialBook: Book, initialBookId: Int) {
+    var url by remember { mutableStateOf(initialBook.image) }
+    var name by remember { mutableStateOf(initialBook.name) }
+    var descricao by remember { mutableStateOf(initialBook.descricao) }
+
     Column(
         Modifier
             .fillMaxSize()
@@ -60,12 +77,10 @@ fun BookFormScreen(onSaveClick: (Book) -> Unit = {}) {
             Modifier.fillMaxWidth(),
             fontSize = 28.sp
         )
-        var url by remember {
-            mutableStateOf("")
-        }
-        if (url.isNotBlank()) {
+        if (url!!.isNotBlank()) {
             AsyncImage(
-                model = url, contentDescription = null,
+                model = url,
+                contentDescription = null,
                 Modifier
                     .fillMaxWidth()
                     .height(200.dp),
@@ -74,18 +89,17 @@ fun BookFormScreen(onSaveClick: (Book) -> Unit = {}) {
                 error = painterResource(id = R.drawable.placeholder)
             )
         }
-        TextField(value = url, onValueChange = {
-            url = it
-        }, Modifier.fillMaxWidth(), label = {
-            Text(text = "Url da imagem")
-        },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Uri,
-                imeAction = ImeAction.Next
+        url?.let {
+            TextField(value = it, onValueChange = {
+                url = it
+            }, Modifier.fillMaxWidth(), label = {
+                Text(text = "Url da imagem")
+            },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Uri,
+                    imeAction = ImeAction.Next
+                )
             )
-        )
-        var name by remember {
-            mutableStateOf("")
         }
         TextField(value = name, onValueChange = {
             name = it
@@ -97,10 +111,6 @@ fun BookFormScreen(onSaveClick: (Book) -> Unit = {}) {
                 imeAction = ImeAction.Next,
                 capitalization = KeyboardCapitalization.Words
             ))
-
-        var descricao by remember {
-            mutableStateOf("")
-        }
         TextField(
             value = descricao,
             onValueChange = {
@@ -120,11 +130,12 @@ fun BookFormScreen(onSaveClick: (Book) -> Unit = {}) {
         Button(
             onClick = {
                 val book = Book(
+                    id = initialBookId,
                     name = name,
                     descricao = descricao,
                     image = url
                 )
-                onSaveClick(book)
+                onSaveClick(book, initialBookId)
             },
             Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray),
@@ -133,15 +144,5 @@ fun BookFormScreen(onSaveClick: (Book) -> Unit = {}) {
             Text(text = "Salvar", fontWeight = FontWeight(700))
         }
         Spacer(modifier = Modifier)
-    }
-}
-
-@Preview
-@Composable
-fun bookFormScreenPreview() {
-    BibliotecaVirtualTheme {
-        Surface {
-            BookFormScreen()
-        }
     }
 }

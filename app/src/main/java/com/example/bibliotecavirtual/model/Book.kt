@@ -1,7 +1,8 @@
 package com.example.bibliotecavirtual.model
 
 data class Book(
-    val name: String,
-    val descricao: String,
-    val image: String? = null
+    val id: Int,
+    var name: String,
+    var descricao: String,
+    var image: String? = null
 )
