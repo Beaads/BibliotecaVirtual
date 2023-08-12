@@ -1,6 +1,5 @@
 package com.example.bibliotecavirtual.ui.theme.components
 
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape

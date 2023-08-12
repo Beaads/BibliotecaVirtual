@@ -1,6 +1,5 @@
 package com.example.bibliotecavirtual.sampleData
 
-import com.example.bibliotecavirtual.R
 import com.example.bibliotecavirtual.model.Book
 
 val sampleBooks = listOf(

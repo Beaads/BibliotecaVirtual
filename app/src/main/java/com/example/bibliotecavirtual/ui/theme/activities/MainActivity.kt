@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.bibliotecavirtual.dao.BookDao
-import com.example.bibliotecavirtual.sampleData.sampleBooks
 import com.example.bibliotecavirtual.ui.theme.*
 import com.example.bibliotecavirtual.ui.theme.components.BooksSection
 
